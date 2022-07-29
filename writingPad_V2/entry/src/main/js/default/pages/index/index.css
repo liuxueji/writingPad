@@ -1,0 +1,9 @@
+.container{
+    margin: 50px;
+}
+.canvas{
+    height: 100%;
+    width: 100%;
+    background-color: #eee;
+    border: 1px solid #ffc300;
+}
