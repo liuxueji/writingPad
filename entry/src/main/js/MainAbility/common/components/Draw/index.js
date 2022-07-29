@@ -16,7 +16,12 @@ export default {
         showEraser:true,
         showSave:true,
         showUndo:true,
-        showRedo:true
+        showRedo:true,
+        foldB: true,
+        foldT: true,
+        value: 0,
+        WidthVal: 5,
+        HeightVal: 250
 
     },
     onLayoutReady(){
@@ -24,6 +29,7 @@ export default {
         this.ctx = el.getContext('2d')
         this.width = el.getBoundingClientRect().width;
         this.height = el.getBoundingClientRect().height;
+        this.getFontSize()
     },
     // 偏移很多
     touchstart(e){
@@ -105,15 +111,19 @@ export default {
     },
     red(){
         this.strokeStyle = 'red'
+        this.getFontSize()
     },
     blue(){
         this.strokeStyle = 'blue'
+        this.getFontSize()
     },
     white(){
         this.strokeStyle = 'white'
+        this.getFontSize()
     },
     black(){
         this.strokeStyle = 'black'
+        this.getFontSize()
     },
     undo(){
         if (this.step >= 0) {
@@ -169,5 +179,29 @@ export default {
         this.showSave=true
         this.showUndo=true
         this.showRedo=true
+    },
+//    控制展开与收缩
+    foldTop() {
+        this.foldT=!this.foldT
+    },
+    foldBottom(){
+        this.foldB = !this.foldB
+    },
+    setvalue(e) {
+        this.lineWidth = e.value;
+        this.getFontSize()
+    },
+    getFontSize(){
+        const el = this.$refs.canvasFont;
+        const ctxFont = el.getContext('2d')
+        ctxFont.beginPath();
+        ctxFont.clearRect(0, 0, 300, 100);
+        ctxFont.lineWidth = this.lineWidth
+        ctxFont.strokeStyle = this.strokeStyle
+        console.log(this.lineWidth)
+        ctxFont.moveTo(50, 50);
+        // 三次贝赛尔曲线的路径
+        ctxFont.lineTo(300, 50);
+        ctxFont.stroke();
     }
 }
