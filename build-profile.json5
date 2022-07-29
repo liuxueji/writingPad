@@ -1,0 +1,41 @@
+{
+  "app": {
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "C:\\Users\\Shinelon\\.ohos\\config\\auto_debug_myapplication_30086000594547540.cer",
+          "storePassword": "0000001B272C866BEB769FE5EDBA71240DAF046FA3B541F4317D0080854F557566FB2994E06982121A57C4",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B24BD2253F2978C8833FE59756B44BCB6DC7B31CAC2764E179A2524F665FB9B5B152B33EA56131C",
+          "profile": "C:\\Users\\Shinelon\\.ohos\\config\\auto_debug_myapplication_30086000594547540.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "C:\\Users\\Shinelon\\.ohos\\config\\auto_debug_myapplication_30086000594547540.p12"
+        }
+      }
+    ],
+    "compileSdkVersion": 8,
+    "compatibleSdkVersion": 8,
+    "products": [
+      {
+        "name": "default",
+        "signingConfig": "default",
+      }
+    ]
+  },
+  "modules": [
+    {
+      "name": "entry",
+      "srcPath": "./entry",
+      "targets": [
+        {
+          "name": "default",
+          "applyToProducts": [
+            "default"
+          ]
+        }
+      ]
+    }
+  ]
+}

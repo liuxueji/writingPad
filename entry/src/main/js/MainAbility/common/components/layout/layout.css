@@ -1,0 +1,55 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+}
+
+
+tab-content{
+    width: 100%;
+    height: 100%;
+}
+tab-bar{
+    height: 100px;
+    width: 100%;
+    padding: 0;
+    padding-top: 4px;
+}
+.b-item-cont{
+    height:150px ;
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    position: relative;
+
+}
+.b-item-cont div{
+    width: 100%;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+
+}
+.b-item-cont div image{
+    width: 42px;
+}
+.b-item-cont .b-item-tite{
+    padding-top: 9px;
+    text-align: center;
+
+}
+
+
+@media screen and (device-type: phone) and (orientation: landscape) {
+
+}
+
+@media screen and (device-type: tablet) and (orientation: landscape) {
+    
+}

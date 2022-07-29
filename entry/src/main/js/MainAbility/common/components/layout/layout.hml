@@ -1,0 +1,25 @@
+<div class="container">
+    <tabs onchange="changePage"  >
+        <tab-content scrollable="false"   style="background-color: {{backgroundColor}};" >
+             <slot name="one"></slot>
+            <slot name="two"></slot>
+            <slot name="tree"></slot>
+            <slot name="four"></slot>
+        </tab-content>
+        <tab-bar mode="fixed"  ref="tes">
+            <div class="b-item-cont" for="imgUrl" 
+                 style="background-color: {{menuCustomStyle.backgroundColor}};">
+                <div>
+                    <image src="{{ $item.show ? activeBaseUrl + $item.active  : iconBaseUrl + $item.icon }}"></image>
+                </div>
+                <div class="b-item-tite">
+                    <text style="font-size:{{menuCustomStyle.fontSize}};
+                                  color:{{ $item.show ? menuCustomStyle.activeColor : menuCustomStyle.color }};" >
+                        {{$item.title}}
+                    </text>
+                </div>
+            </div>
+        </tab-bar>
+    </tabs>
+</div>
+

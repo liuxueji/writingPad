@@ -1,0 +1,35 @@
+
+<div class="PracticeWords">
+    <div>
+        <canvas ref="canvas" class="canvas" @touchstart="touchstart"
+                @touchmove="touchmove" @touchend="touchend"/>
+    </div>
+    <div>
+        <canvas ref="canvas2" class="canvas2"/>
+    </div>
+    <div class="editor">
+        <div>
+            <text @touchstart="clearBtn">
+                清空
+            </text>
+            <text @touchstart="EraserBtn">
+                橡皮擦
+            </text>
+            <text @touchstart="saveBtn">
+                查看
+            </text>
+        </div>
+        <div>
+            <text  @touchstart="undo">
+                ←
+            </text>
+            <text  @touchstart="redo">
+                →
+            </text>
+        </div>
+    </div>
+    <div class="doc-page">
+        <dialog id="dialogId">
+        </dialog>
+    </div>
+</div>

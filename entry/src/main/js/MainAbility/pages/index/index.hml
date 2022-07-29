@@ -1,0 +1,22 @@
+<element name="layout" src="../../common/components/layout/layout.hml"></element>
+<element name="draw" src="../../common/components/Draw/index.hml"></element>
+<element name="write" src="../../common/components/Write/index.hml"></element>
+<div class="container">
+    <layout  @child-layout-change='setTitle' >
+        <div slot="one" class="one">
+            <write></write>
+        </div>
+        <div slot="two" class="one">
+            <draw></draw>
+        </div>
+        <div slot="tree"  >
+            <draw></draw>
+        </div>
+        <div slot="four"  >
+            <text>
+                第四
+            </text>
+        </div>
+    </layout>
+
+</div>

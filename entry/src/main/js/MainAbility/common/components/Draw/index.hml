@@ -1,0 +1,43 @@
+
+<div class="drawing">
+    <div>
+        <canvas ref="canvas" class="canvas" @touchstart="touchstart"
+                @touchmove="touchmove" @touchend="touchend"/>
+    </div>
+    <div class="editorDraw">
+        <div>
+            <text class="red" @touchstart="red">
+            </text>
+            <text class="blue" @touchstart="blue">
+            </text>
+            <text class="white" @touchstart="white">
+            </text>
+            <text class="black" @touchstart="black">
+            </text>
+        </div>
+    </div>
+
+
+    <div class="editor">
+        <div @touchstart="clearBtn"  @touchend="clearBtnEnd"  class="clear">
+            <image src="common/images/icon/clear.png" if="{{ showClear }}"></image>
+            <image src="common/images/icon_active/clear_active.png" else></image>
+        </div>
+        <div @touchstart="EraserBtn" class="eraser">
+            <image src="common/images/icon/eraser.png" if="{{ showEraser }}"></image>
+            <image src="common/images/icon_active/eraser_active.png" else></image>
+        </div>
+        <div @touchstart="saveBtn" @touchend="saveBtnEnd" class="save">
+            <image src="common/images/icon/save.png" if="{{ showSave }}"></image>
+            <image src="common/images/icon_active/save_active.png" else></image>
+        </div>
+        <div @touchstart="undo" @touchend="undoEnd" class="undo">
+            <image src="common/images/icon/undo.png" if="{{ showUndo }}"></image>
+            <image src="common/images/icon_active/undo_active.png" else></image>
+        </div>
+        <div @touchstart="redo" @touchend="redoEnd" class="redo">
+            <image src="common/images/icon/redo.png" if="{{ showRedo }}"></image>
+            <image src="common/images/icon_active/redo_active.png" else></image>
+        </div>
+    </div>
+</div>
