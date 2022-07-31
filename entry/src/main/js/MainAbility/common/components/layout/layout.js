@@ -1,16 +1,3 @@
-
-/*layout 组件props
-  iconBaseUrl 导航菜单图片路径, type : string, default : "common/images/icon/"
-  activeBaseUrl 当前激活的菜单图片路径, type : string, default : "common/images/icon_active/"
-  menu 导航栏信息 type:[Object], {
-                                    icon: 未激活时的图片, 例如 xxx.png
-                                    active :激活时的图片,
-                                    title : 标题
-
-                                }
-
-
-*/
 export default {
     props:{
         iconBaseUrl:{

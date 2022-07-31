@@ -96,4 +96,8 @@
             </stepper>
         </div>
     </div>
+    <div class="ratingContainer">
+        <rating numstars="5" rating="{{rating}}" @change="changeRating" id="rating" show="{{isRating}}">
+        </rating>
+    </div>
 </div>

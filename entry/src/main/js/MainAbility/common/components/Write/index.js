@@ -18,7 +18,7 @@ export default {
         saveImg:'',//保存的图片
         canvasHistory:[],
         step:-1,
-        pathX:[150,45,105,255,375,475], // 文字的书写顺序
+        pathX:[120,40,208,85,310,390], // 文字的书写顺序
         pathIndex:0,
         isRedo:false,//判断是否需要回退
         foldB: true,
@@ -26,7 +26,12 @@ export default {
         divWidth: 200,//动画
         animator: null,
         isAnimator:true, // 动画开始与结束
-        isStepper:false
+        isStepper:false, // 帮助
+        rating:5, // 评分等级
+        lastRating:null, // 旧评分
+        showRatingTip:'', // 评分提示语
+        isRating:false, // 评分显示与隐藏
+        saveScale:0.5 //存储缩放
     },
     onLayoutReady(){
         this.getBgcImage()
@@ -36,11 +41,9 @@ export default {
         this.ctx = el.getContext('2d')
         this.width = el.getBoundingClientRect().width;
         this.height = el.getBoundingClientRect().height;
-        setTimeout(()=>{
-            //        获取完文字后先获取最初状态
-            this.step++;
-            this.canvasHistory.push(el.toDataURL()); // 添加新的绘制到历史记录
-        },0)
+        //        获取完文字后先获取最初状态
+        this.step++;
+        this.canvasHistory.push(el.toDataURL()); // 添加新的绘制到历史记录
 //        动画
         var options = {
             duration: 1500,
@@ -60,7 +63,7 @@ export default {
         this.ArrY.push(e.touches[0].localY)
         if(e.touches[0].localX>this.pathX[this.pathIndex]+20 || e.touches[0].localX<this.pathX[this.pathIndex]-20){
             this.isRedo = true
-            console.log(this.pathIndex)
+            this.rating-- // 如果写错一步，星星减一
         }else{
             this.pathIndex++
         }
@@ -113,13 +116,12 @@ export default {
 
         if(this.isRedo){
             this.openDialog()
+            this.ctx.clearRect(0, 0, this.width, this.height);
             let canvasPic = new Image();
             canvasPic.src = this.canvasHistory[this.step];
             let that = this
-            console.log(this.step)
             canvasPic.onload = function() {
                 // 画上图片
-                that.ctx.clearRect(0, 0, this.width, this.height);
                 that.ctx.drawImage(canvasPic, 0, 0);
             };
             this.isRedo = false
@@ -166,14 +168,20 @@ export default {
     saveBtn(){
         const el = this.$refs.canvas2;
         const ctx = el.getContext('2d')
+        let width = el.getBoundingClientRect().width;
+        let height = el.getBoundingClientRect().height;
+        ctx.clearRect(0, 0, width, height);
         let index = this.canvasHistory.length - 1
         this.saveImg = el.toDataURL();
         let canvasPic = new Image();
         canvasPic.src = this.canvasHistory[index];
-        ctx.scale(.6,.6);
+        ctx.scale(this.saveScale,this.saveScale);
+        this.saveScale = 1
         canvasPic.onload = function() {
             ctx.drawImage(canvasPic, 0, 0);
         };
+//        ctx.scale(2,2);
+        this.showRating()
     },
     withdraw(){
         this.ArrX.pop()
@@ -184,6 +192,8 @@ export default {
         this.formLine()
         this.getBgcImage()
         this.pathIndex = 0
+//        this.canvasHistory=[]
+        this.isRating = false
     },
     getBgcImage(){
         const el = this.$refs.canvas;
@@ -199,7 +209,6 @@ export default {
             // 画上图片
             that.ctx.drawImage(img, 0,0, this.width, this.height);
         };
-
     },
     showEditor(){
     },
@@ -210,11 +219,10 @@ export default {
             let canvasPic = new Image();
             canvasPic.src = this.canvasHistory[this.step];
             let that = this
-            console.log(this.step)
             canvasPic.onload = function() {
-                // 画上图片
                 that.ctx.drawImage(canvasPic, 0, 0);
             };
+            this.pathIndex--
         } else {
             this.$element('dialogId').show()
             prompt.showToast({
@@ -232,6 +240,7 @@ export default {
                 that.ctx.clearRect(0, 0, this.width, this.height);
                 that.ctx.drawImage(canvasPic, 0, 0);
             };
+            this.pathIndex++
         } else {
             this.$element('dialogId').show()
             prompt.showToast({
@@ -311,7 +320,17 @@ export default {
     },
     submit(e){
         router.push ({
-            uri: 'pages/detail/detail',
+            uri: 'pages/serch/serch',
         });
+    },
+    showRating(){
+        this.isRating = true
+        if(this.lastRating !== null){
+            if(this.rating >= lastRating){
+                this.showRatingTip = '太棒了！再接再厉！'
+            }else{
+                this.showRatingTip = '加油你能做的更好！'
+            }
+        }
     }
 }
