@@ -21,8 +21,8 @@
     </div>
 
 
-    <div class="{{foldT?'editorOn':'editorOff'}}">
-        <div @touchstart="clearBtn"  @touchend="clearBtnEnd"  class="clear">
+    <div class="editorOff"  style="transform: translateX({{divWidth}});">
+        <div  @touchstart="clearBtn" @touchend="clearBtnEnd"  class="clear">
             <image src="common/images/icon/clear.png" if="{{ showClear }}"></image>
             <image src="common/images/icon_active/clear_active.png" else></image>
         </div>
@@ -42,7 +42,7 @@
             <image src="common/images/icon/redo.png" if="{{ showRedo }}"></image>
             <image src="common/images/icon_active/redo_active.png" else></image>
         </div>
-        <div  @touchstart="foldTop" style="margin-left: -30px;width: 100px;height: 80px;">
+        <div  @touchstart="foldTop" onclick="Show"  style="margin-left: -30px;width: 100px;height: 80px;">
             <image src="common/images/icon/right.png"></image>
         </div>
     </div>

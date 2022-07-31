@@ -61,8 +61,8 @@
 .editorOff{
     position: absolute;
     bottom: 100px;
+    left: -800px;
     transition: 0.5s ease;
-    transform: translateX(0);
 }
 .editorOn{
     position: absolute;

@@ -1,4 +1,5 @@
 // @ts-nocheck
+import animator from '@ohos.animator';
 export default {
     data: {
         ctx:'',
@@ -21,7 +22,9 @@ export default {
         foldT: true,
         value: 0,
         WidthVal: 5,
-        HeightVal: 250
+        HeightVal: 250,
+        divWidth: 200, // 动画
+        animator: null
 
     },
     onLayoutReady(){
@@ -30,6 +33,16 @@ export default {
         this.width = el.getBoundingClientRect().width;
         this.height = el.getBoundingClientRect().height;
         this.getFontSize()
+//        动画
+        var options = {
+            duration: 1500,
+            easing: 'friction',
+            fill: 'forwards',
+            iterations: 2,
+            begin: 200.0,
+            end: 400.0
+        };
+        this.animator = animator.createAnimator(options);
     },
     // 偏移很多
     touchstart(e){
@@ -180,10 +193,6 @@ export default {
         this.showUndo=true
         this.showRedo=true
     },
-//    控制展开与收缩
-    foldTop() {
-        this.foldT=!this.foldT
-    },
     foldBottom(){
         this.foldB = !this.foldB
     },
@@ -203,5 +212,27 @@ export default {
         // 三次贝赛尔曲线的路径
         ctxFont.lineTo(300, 50);
         ctxFont.stroke();
+    },
+    //    动画
+    Show() {
+        this.isAnimator = !this.isAnimator
+        var options1 = {
+            duration: 2000,
+            easing: 'friction',
+            fill: 'forwards',
+            iterations: 1,
+            begin: 200.0,
+            end: 800.0
+        };
+        this.animator.update(options1);
+        var _this = this;
+        this.animator.onframe = function(value) {
+            _this.divWidth = value;
+        };
+        if(this.isAnimator){
+            this.animator.play();
+        }else{
+            this.animator.reverse();
+        }
     }
 }

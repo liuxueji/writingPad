@@ -1,5 +1,7 @@
 // @ts-nocheck
+import animator from '@ohos.animator';
 import prompt from '@system.prompt';
+import router from '@system.router';
 export default {
     data: {
         ctx:'',
@@ -19,6 +21,12 @@ export default {
         pathX:[150,45,105,255,375,475], // 文字的书写顺序
         pathIndex:0,
         isRedo:false,//判断是否需要回退
+        foldB: true,
+        foldT: true,
+        divWidth: 200,//动画
+        animator: null,
+        isAnimator:true, // 动画开始与结束
+        isStepper:false
     },
     onLayoutReady(){
         this.getBgcImage()
@@ -33,6 +41,16 @@ export default {
             this.step++;
             this.canvasHistory.push(el.toDataURL()); // 添加新的绘制到历史记录
         },0)
+//        动画
+        var options = {
+            duration: 1500,
+            easing: 'friction',
+            fill: 'forwards',
+            iterations: 2,
+            begin: 200.0,
+            end: 400.0
+        };
+        this.animator = animator.createAnimator(options);
     },
     // 偏移很多
     touchstart(e){
@@ -152,7 +170,7 @@ export default {
         this.saveImg = el.toDataURL();
         let canvasPic = new Image();
         canvasPic.src = this.canvasHistory[index];
-        ctx.scale(.5,.5);
+        ctx.scale(.6,.6);
         canvasPic.onload = function() {
             ctx.drawImage(canvasPic, 0, 0);
         };
@@ -175,7 +193,7 @@ export default {
         // 创建图片对象
         let img = new Image();
         // 设置图片路径
-        img.src = 'common/images/liu4.png';
+        img.src = 'common/images/liu5.png';
         let that = this
         img.onload = function() {
             // 画上图片
@@ -228,5 +246,72 @@ export default {
         prompt.showToast({
             message: '笔画不对，再来一次！'
         })
+    },
+    foldBottom(){
+        this.foldB = !this.foldB
+    },
+    showhintDialog(e) {
+        this.$element('hintDialog').show()
+    },
+    sethintDialog(e) {
+        this.$element('hintDialog').close()
+    },
+//    动画
+    Show() {
+        this.isAnimator = !this.isAnimator
+        var options1 = {
+            duration: 2000,
+            easing: 'friction',
+            fill: 'forwards',
+            iterations: 1,
+            begin: 200.0,
+            end: 800.0
+        };
+        this.animator.update(options1);
+        var _this = this;
+        this.animator.onframe = function(value) {
+            _this.divWidth = value;
+        };
+        if(this.isAnimator){
+            this.animator.reverse();
+        }else{
+            this.animator.play();
+        }
+    },
+    stepperFinish(){
+        this.isStepper = false
+    },
+    showStepper(){
+        this.isStepper = true
+    },
+//    搜索功能
+    search(e){
+        prompt.showToast({
+            message:  e.value,
+            duration: 3000,
+        });
+    },
+    translate(e){
+        prompt.showToast({
+            message:  e.value,
+            duration: 3000,
+        });
+    },
+    share(e){
+        prompt.showToast({
+            message:  e.value,
+            duration: 3000,
+        });
+    },
+    change(e){
+        prompt.showToast({
+            message:  e.value,
+            duration: 3000,
+        });
+    },
+    submit(e){
+        router.push ({
+            uri: 'pages/detail/detail',
+        });
     }
 }

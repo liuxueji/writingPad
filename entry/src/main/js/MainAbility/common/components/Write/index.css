@@ -1,14 +1,17 @@
-.container{
-}
 .canvas{
-    height: 600px;
-    width: 600px;
+    height: 500px;
+    width: 500px;
+}
+.canvasBox{
+    margin-top: 150px;
 }
 .canvas2{
-    margin-top: 30px;
     height: 300px;
     width: 300px;
     border: 3px solid black;
+}
+.canvas2Box{
+    margin-top: 50px;
 }
 .editor text{
     margin: 10px;
@@ -19,6 +22,9 @@
     align-items: center;
 }
 .PracticeWords{
+    width: 100%;
+    height: 100%;
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -28,29 +34,134 @@
     flex-direction: column;
     align-items: center;
 }
-.canvasDraw{
-    height: 360px;
-    width: 360px;
-}
-.drawing{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.editorDraw text{
-    margin: 10px;
-}
-.editor{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
 
 /* dialog */
 .doc-page {
-    width:100%;
-    height:100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+.editorOff{
+    position: absolute;
+    bottom: 0px;
+    left: -800px;
+    transition: 0.5s ease;
+}
+.editorOn{
+    position: absolute;
+    bottom: 0px;
+    transition: 0.5s ease;
+    transform: translateX(-500px);
+}
+.editorOff div{
+    width: 80px;
+    height: 80px;
+    margin: 25px;
+}
+.editorOn div{
+    width: 80px;
+    height: 80px;
+    margin: 25px;
+}
+.help{
+    position: absolute;
+    top: 110px;
+    right: 0px;
+}
+.help image{
+    width: 100px;
+    height: 100px;
+}
+.dialog-div {
+    flex-direction: column;
+    align-items: center;
+}
+.inner-txt {
+    width: 80%;
+    height: 100px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.txt {
+    font-size: 45px;
+    color: #000000;
+    font-weight: bold;
+}
+.containerText {
+    margin: 0% 20px;
+    height: 250px;
+    font-size: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.inner-btn {
+    width: 80%;
+    height: 100px;
+    align-items: center;
+    justify-content: space-around;
+}
+.nest-div {
+    background-color: #FFFFFF;
+}
+.read{
+    position: absolute;
+    top: 110px;
+    left: 0px;
+}
+.read image{
+    width: 90px;
+    height: 90px;
+}
+.popup {
+    mask-color: gray;
+}
+.text {
+    color: white;
+}
+.Animation{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+/*使用教程*/
+.container {
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color:#F1F3F5;
+}
+.stepperContent{
+    width:1080px;
+    height:1920px;
+}
+.stepperClass{
+    border:1px solid silver ;
+    background-color: white;
+    font-size: 45px;
+}
+text{
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+.stepperClass .tip {
+    font-size: 40px;
+    font-weight: 700;
+}
+.searchContainer {
+    position: absolute;
+    top: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #F1F3F5;
+}
+text{
+    width: 100%;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 100px;
 }
