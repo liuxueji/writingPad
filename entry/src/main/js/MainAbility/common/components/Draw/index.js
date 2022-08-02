@@ -76,12 +76,12 @@ export default {
         const el = this.$refs.canvas;
         this.step++;
         this.canvasHistory.push(el.toDataURL()); // 添加新的绘制到历史记录
-        console.log(this.step)
+//        console.log(this.step)
     },
     saveBtn(){
         const el = this.$refs.canvas;
         const dataURL = el.toDataURL();
-        console.log(dataURL);
+//        console.log(dataURL);
     },
     withdraw(){
         this.ArrX.pop()
@@ -196,6 +196,9 @@ export default {
     foldBottom(){
         this.foldB = !this.foldB
     },
+    foldTop(){
+        this.foldT = !this.foldT
+    },
     setvalue(e) {
         this.lineWidth = e.value;
         this.getFontSize()
@@ -207,7 +210,7 @@ export default {
         ctxFont.clearRect(0, 0, 300, 100);
         ctxFont.lineWidth = this.lineWidth
         ctxFont.strokeStyle = this.strokeStyle
-        console.log(this.lineWidth)
+//        console.log(this.lineWidth)
         ctxFont.moveTo(50, 50);
         // 三次贝赛尔曲线的路径
         ctxFont.lineTo(300, 50);
@@ -219,7 +222,7 @@ export default {
         var options1 = {
             duration: 2000,
             easing: 'friction',
-            fill: 'forwards',
+            fill: 'both',
             iterations: 1,
             begin: 200.0,
             end: 800.0

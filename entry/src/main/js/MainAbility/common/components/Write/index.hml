@@ -17,7 +17,7 @@
         </dialog>
     </div>
 
-    <div class="editorOff" style="transform: translateX({{divWidth}});">
+    <div class="{{foldT?'editorOn':'editorOff'}}">
         <div @touchstart="clearBtn"  @touchend="clearBtnEnd"  class="clear">
             <image src="common/images/icon/clear.png" if="{{ showClear }}"></image>
             <image src="common/images/icon_active/clear_active.png" else></image>
@@ -38,7 +38,7 @@
             <image src="common/images/icon/redo.png" if="{{ showRedo }}"></image>
             <image src="common/images/icon_active/redo_active.png" else></image>
         </div>
-        <div   onclick="Show" style="margin-left: -30px;width: 100px;height: 80px;">
+        <div onclick="Show"  @touchstart="foldTop" style="margin-left: -30px;width: 100px;height: 80px;">
             <image src="common/images/icon/right.png"></image>
         </div>
     </div>
@@ -53,10 +53,7 @@
             </div>
             <div class="containerText">
                 <text>
-                    介绍：刘，汉语一级字，读作liú或liǔ，最早见于甲骨文 。
-                </text>
-                <text>
-                    笔顺：丶一ノ丶丨丨
+                    笔顺:丶一ノ丶丨丨
                 </text>
             </div>
             <div class="inner-btn">
@@ -65,7 +62,7 @@
         </div>
     </dialog>
     <div class="read" onclick="showhintDialog">
-        <image src="common/images/icon/read.png" if="{{ showRedo }}"></image>
+        <image src="common/images/icon/read.png" if="{{ showRead }}"></image>
         <image src="common/images/icon_active/read_active.png" else></image>
     </div>
     <div class="container" show="{{isStepper}}" >
@@ -91,7 +88,7 @@
                     <text>当你写完时，可以进行存储，并且在下方进行展示</text>
                 </stepper-item>
                 <stepper-item>
-                    <text>点击完成，让我们愉快的练字吧！</text>
+                    <text>点击开始，让我们愉快的练字吧！</text>
                 </stepper-item>
             </stepper>
         </div>
@@ -100,4 +97,5 @@
         <rating numstars="5" rating="{{rating}}" @change="changeRating" id="rating" show="{{isRating}}">
         </rating>
     </div>
+    <div class="test"></div>
 </div>

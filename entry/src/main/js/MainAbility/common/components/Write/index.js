@@ -21,17 +21,23 @@ export default {
         pathX:[120,40,208,85,310,390], // 文字的书写顺序
         pathIndex:0,
         isRedo:false,//判断是否需要回退
-        foldB: true,
         foldT: true,
         divWidth: 200,//动画
         animator: null,
-        isAnimator:true, // 动画开始与结束
+        isAnimator:'translateR', // 动画开始与结束
         isStepper:false, // 帮助
         rating:5, // 评分等级
         lastRating:null, // 旧评分
         showRatingTip:'', // 评分提示语
         isRating:false, // 评分显示与隐藏
-        saveScale:0.5 //存储缩放
+        saveScale:0.5, //存储缩放
+        color:'color',
+        showClear:true,
+        showEraser:true,
+        showSave:true,
+        showUndo:true,
+        showRedo:true,
+        showRead:true,
     },
     onLayoutReady(){
         this.getBgcImage()
@@ -61,7 +67,7 @@ export default {
         this.startTime = Date.now()-1
         this.ArrX.push(e.touches[0].localX)
         this.ArrY.push(e.touches[0].localY)
-        if(e.touches[0].localX>this.pathX[this.pathIndex]+20 || e.touches[0].localX<this.pathX[this.pathIndex]-20){
+        if(e.touches[0].localX>this.pathX[this.pathIndex]+30 || e.touches[0].localX<this.pathX[this.pathIndex]-30){
             this.isRedo = true
             this.rating-- // 如果写错一步，星星减一
         }else{
@@ -87,7 +93,7 @@ export default {
             else if(v<1){
                 this.lineWidth = 30
             }else{
-                this.lineWidth = 30 - v * 3
+                this.lineWidth = 30 - v * 15
             }
             this.lineWidth = this.oldLineWidth/3+this.oldoldLineWidth/3+(this.lineWidth)/3
         }
@@ -182,6 +188,11 @@ export default {
         };
 //        ctx.scale(2,2);
         this.showRating()
+        this.showClear = true
+        this.showEraser=true
+        this.showSave=false
+        this.showUndo=true
+        this.showRedo=true
     },
     withdraw(){
         this.ArrX.pop()
@@ -194,6 +205,12 @@ export default {
         this.pathIndex = 0
 //        this.canvasHistory=[]
         this.isRating = false
+        this.rating = 5 // 评分等级
+        this.showClear = false
+        this.showEraser=true
+        this.showSave=true
+        this.showUndo=true
+        this.showRedo=true
     },
     getBgcImage(){
         const el = this.$refs.canvas;
@@ -229,6 +246,12 @@ export default {
                 message: '不能再继续撤销了'
             })
         }
+
+        this.showClear = true
+        this.showEraser=true
+        this.showSave=true
+        this.showUndo=false
+        this.showRedo=true
     },
     redo(){
         if (this.step < this.canvasHistory.length - 1) {
@@ -247,6 +270,12 @@ export default {
                 message: '已经是最新的记录了'
             })
         }
+
+        this.showClear = true
+        this.showEraser=true
+        this.showSave=true
+        this.showUndo=true
+        this.showRedo=false
     },
 
 //    dialog
@@ -256,25 +285,30 @@ export default {
             message: '笔画不对，再来一次！'
         })
     },
-    foldBottom(){
-        this.foldB = !this.foldB
+    foldTop(){
+        this.foldT = !this.foldT
     },
     showhintDialog(e) {
         this.$element('hintDialog').show()
+        this.showRead = false
     },
     sethintDialog(e) {
         this.$element('hintDialog').close()
+        this.showRead = true
     },
 //    动画
     Show() {
-        this.isAnimator = !this.isAnimator
+        if(this.isAnimator == 'translate'){
+            this.isAnimator = 'translateR'
+        }else{
+            this.isAnimator = 'translate'
+        }
         var options1 = {
-            duration: 2000,
-            easing: 'friction',
+            duration: 1000,
             fill: 'forwards',
-            iterations: 1,
+            iterations: 2,
             begin: 200.0,
-            end: 800.0
+            end:500.0
         };
         this.animator.update(options1);
         var _this = this;
@@ -332,5 +366,43 @@ export default {
                 this.showRatingTip = '加油你能做的更好！'
             }
         }
-    }
+    },
+    colorBtn(){
+        this.color = 'colorR'
+    },
+
+    clearBtnEnd(){
+        this.canvasHistory = []
+        this.step = -1
+        this.showClear = true
+    },
+    EraserBtn(){
+        this.isEraser = !this.isEraser
+        this.showClear = true
+        this.showEraser=!this.showEraser
+        this.showSave=true
+        this.showUndo=true
+        this.showRedo=true
+    },
+    saveBtnEnd(){
+        this.showClear = true
+        this.showEraser=true
+        this.showSave=true
+        this.showUndo=true
+        this.showRedo=true
+    },
+    undoEnd(){
+        this.showClear = true
+        this.showEraser=true
+        this.showSave=true
+        this.showUndo=true
+        this.showRedo=true
+    },
+    redoEnd(){
+        this.showClear = true
+        this.showEraser=true
+        this.showSave=true
+        this.showUndo=true
+        this.showRedo=true
+    },
 }
