@@ -1,0 +1,14 @@
+
+<div>
+    <div class="richtext" ref="richtext" style="flex-direction: column;width: 100%;height: 100%;">
+        <richtext @start="onLoadStart" @complete="onLoadEnd">{{content}}</richtext>
+    </div>
+    <canvas class="mark" ref="canvasMark" @touchstart="touchstart"
+            @touchmove="touchmove" @touchend="touchend" show="{{ isShow }}"></canvas>
+    <canvas class="mark2" ref="canvasMark2" show="{{ !isShow }}"></canvas>
+    <div class="btn" @click="isShowBtn">
+        <text>
+            点击切换
+        </text>
+    </div>
+</div>

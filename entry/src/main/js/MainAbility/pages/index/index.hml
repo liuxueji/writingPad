@@ -1,6 +1,8 @@
 <element name="layout" src="../../common/components/layout/layout.hml"></element>
 <element name="draw" src="../../common/components/Draw/index.hml"></element>
 <element name="write" src="../../common/components/Write/index.hml"></element>
+<element name="note" src="../../common/components/Note/index.hml"></element>
+<element name="test" src="../../common/components/test/index.hml"></element>
 <div class="container">
     <layout  @child-layout-change='setTitle' >
         <div slot="one" class="one">
@@ -10,12 +12,10 @@
             <draw></draw>
         </div>
         <div slot="tree"  >
-            <draw></draw>
+            <note></note>
         </div>
         <div slot="four"  >
-            <text>
-                第四
-            </text>
+            <test></test>
         </div>
     </layout>
 
